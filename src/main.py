@@ -84,4 +84,17 @@ ratio_list = result.display_emo_ratio(df_sentence, listOfCharacter, listOfEmotio
 for num in range(0, numOfCharacter):
     print(f'{listOfCharacter[num]}의 감정 비율 : {ratio_list[num]}')
 
+# =============================
+# 추가 기능 1: 감정 단어로 워드 클라우드 생성 기능 추가
+# =============================
+def generate_word_cloud(emotion_words):
+    wordcloud = WordCloud(width=800, height=400, background_color="white").generate(" ".join(emotion_words))
+    plt.figure(figsize=(10, 5))
+    plt.imshow(wordcloud, interpolation="bilinear")
+    plt.axis("off")
+    plt.show()
+
+emotion_words = df_sentence['emotion_word'].dropna().tolist()
+generate_word_cloud(emotion_words)
+
 book.close()
