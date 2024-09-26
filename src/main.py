@@ -8,17 +8,29 @@ import os
 import math
 import pandas as pd
 
+
+pd.set_option('mode.chained_assignment', None)
+
 # ==============================
 # 수정: OS에 구애받지 않고 경로 처리를 안전하게 하기 위한 함수 추가
 # ==============================
 def get_file_path(*args):
     return os.path.join(*args)
 
-pd.set_option('mode.chained_assignment', None)
-
-# 파일 입력
-storyName = input("소설명 : ")
-book = create.open_book(storyName)
+# =============================
+# 수정: 파일 입력 오류 처리 추가
+# 파일이 존재하지 않거나 열 수 없을 때 예외 처리
+# =============================
+while True:
+    try:
+        storyName = input("소설명 : ")
+        book = create.open_book(storyName)
+        if book:
+            break
+        else:
+            print("파일이 존재하지 않거나 열 수 없습니다. 다시 입력해주세요.")
+    except Exception as e:
+        print(f"오류 발생: {e}")
 
 # 결과 출력 디렉토리 생성
 create.create_folder(f'../res/output/{storyName}')
