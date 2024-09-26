@@ -8,6 +8,12 @@ import os
 import math
 import pandas as pd
 
+# =============================
+# 수정: OS에 구애받지 않고 경로 처리를 안전하게 하기 위한 함수 추가
+# =============================
+def get_file_path(*args):
+    return os.path.join(*args)
+
 pd.set_option('mode.chained_assignment', None)
 
 # 파일 입력
